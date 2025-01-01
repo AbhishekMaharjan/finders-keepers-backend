@@ -51,7 +51,7 @@
 
 - To see running docker services
     ```bash
-       docker-ps
+       docker ps
     ```
 
   
