@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create-table-authorization" author="Abhishek Maharjan">
+        <createTable tableName="authorizations">
+            <column name="id" type="VARCHAR(50)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_authorizations"/>
+            </column>
+            <column name="registered_client_id" type="VARCHAR(5)"/>
+            <column name="principal_name" type="VARCHAR(50)"/>
+            <column name="authorization_grant_type" type="VARCHAR(25)"/>
+            <column name="authorized_scopes" type="VARCHAR(10)"/>
+            <column name="attributes" type="VARCHAR(3500)"/>
+            <column name="state" type="VARCHAR(500)"/>
+            <column name="access_token_value" type="VARCHAR(700)"/>
+            <column name="access_token_issued_at" type="DATETIME"/>
+            <column name="access_token_expires_at" type="DATETIME"/>
+            <column name="access_token_meta_data" type="VARCHAR(800)"/>
+            <column name="access_token_type" type="VARCHAR(5)"/>
+            <column name="access_token_scopes" type="VARCHAR(5)"/>
+            <column name="refresh_token_value" type="VARCHAR(150)"/>
+            <column name="refresh_token_issued_at" type="DATETIME"/>
+            <column name="refresh_token_expires_at" type="DATETIME"/>
+            <column name="refresh_token_meta_data" type="VARCHAR(90)"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

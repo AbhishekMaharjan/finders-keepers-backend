@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create-sequence-item-record" author="abhishek maharjan">
+        <createSequence incrementBy="1" sequenceName="item_record_seq" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="create-table-item-record" author="abhishek maharjan">
+        <createTable tableName="item_record">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_item_record"/>
+            </column>
+            <column name="remarks" type="varchar(500)"/>
+            <column name="users_id" type="bigint"/>
+            <column name="status" type="varchar(20)"/>
+            <column name="item_id" type="bigint"/>
+            <column name="file_id" type="bigint"/>
+            <column name="is_deleted" type="boolean"/>
+            <column name="created_date" type="DATETIME"/>
+            <column name="modified_date" type="DATETIME"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="modified_by" type="BIGINT"/>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="users_id"
+                                 baseTableName="item_record"
+                                 constraintName="fk_item_record_users"
+                                 referencedColumnNames="id"
+                                 referencedTableName="users"/>
+
+        <addForeignKeyConstraint baseColumnNames="item_id"
+                                 baseTableName="item_record"
+                                 constraintName="fk_item_record_item"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item"/>
+
+
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="item_record"
+                                 constraintName="fk_item_record_file"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file"/>
+    </changeSet>
+
+</databaseChangeLog>

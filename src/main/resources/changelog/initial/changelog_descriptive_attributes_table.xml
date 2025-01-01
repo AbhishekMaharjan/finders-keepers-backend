@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create-descriptive-attributes-sequence" author="abhishek maharjan">
+        <createSequence sequenceName="descriptive_attributes_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="create-descriptive-attributes-table" author="abhishek maharjan">
+        <createTable tableName="descriptive_attributes">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_descriptive_attributes" nullable="false"/>
+            </column>
+            <column name="brand" type="VARCHAR(50)"/>
+            <column name="color" type="VARCHAR(20)"/>
+            <column name="unique_identifier" type="VARCHAR(50)"/>
+            <column name="item_condition" type="VARCHAR(50)"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+        </createTable>
+    </changeSet>
+
+
+
+</databaseChangeLog>

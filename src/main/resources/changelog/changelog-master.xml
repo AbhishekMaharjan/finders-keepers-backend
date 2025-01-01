@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="/changelog/initial/changelog_authorities_table.xml"/>
+    <include file="/changelog/initial/changelog_client_table.xml"/>
+    <include file="/changelog/initial/changelog_country_table.xml"/>
+    <include file="/changelog/initial/changelog_address_table.xml"/>
+    <include file="/changelog/initial/changelog_user_table.xml"/>
+    <include file="/changelog/initial/changelog_authorizations_table.xml"/>
+    <include file="/changelog/initial/changelog_user_authorities_table.xml"/>
+    <include file="/changelog/initial/changelog_descriptive_attributes_table.xml"/>
+    <include file="/changelog/initial/changelog_item_category_table.xml"/>
+    <include file="/changelog/initial/changelog_file_table.xml"/>
+    <include file="/changelog/initial/changelog_item_table.xml"/>
+    <include file="/changelog/initial/changelog_item_record_table.xml"/>
+    <include file="/changelog/initial/changelog_init_data.xml"/>
+    <include file="/changelog/initial/changelog_country_data.xml"/>
+    <includeAll path="/changelog/v1"/>
+</databaseChangeLog>

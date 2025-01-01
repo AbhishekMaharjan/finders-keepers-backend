@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create-item-category-sequence" author="abhishek maharjan">
+        <createSequence sequenceName="item_category_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="create-item-category-table" author="abhishek maharjan">
+        <createTable tableName="item_category">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_item_category" nullable="false"/>
+            </column>
+            <column name="level" type="INT"/>
+            <column name="name" type="VARCHAR(50)"/>
+            <column name="parent_item_category_id" type="BIGINT"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-fk-parent-item-category" author="Abhishek maharjan">
+        <addForeignKeyConstraint baseColumnNames="parent_item_category_id"
+                                 baseTableName="item_category"
+                                 constraintName="fk_parent_item_category"
+                                 referencedColumnNames="id"
+                                 referencedTableName="item_category"
+                                 onDelete="SET NULL"
+                                 onUpdate="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="insert-static-categories-data" author="abhishek maharjan">
+        <sql>
+            <![CDATA[
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted") VALUES (1, 0, 'Electronics Devices', false);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (2, 1, 'Smart Phone', false,1);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (3, 1, 'Smart Watch', false,1);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (4, 1, 'Tablets/iPad', false,1);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (5, 1, 'AirBuds/Headphones', false,1);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (6, 1, 'Cameras', false,1);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (7, 1, 'Power Banks', false,1);
+
+
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted") VALUES (8, 0, 'Documents', false);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (9, 1, 'Citizenship', false,8);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (10, 1, 'Passport', false,8);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (11, 1, 'Driving License', false,8);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (12, 1, 'Travel Documents', false,8);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (13, 1, 'Others Docs', false,8);
+
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted") VALUES (14, 0, 'Personal Belongings', false);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (15, 1, 'Wallet/Purses', false,14);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (16, 1, 'Jewelry', false,14);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (17, 1, 'Keys', false,14);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (18, 1, 'Watch', false,14);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (19, 1, 'ID Card', false,14);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (20, 1, 'Credit/Debit Card', false,14);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (21, 1, 'Others', false,14);
+
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted") VALUES (22, 0, 'Wearable Items', false);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (23, 1, 'Sunglasses/Glasses', false,22);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (24, 1, 'Jackets/Coats', false,22);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (25, 1, 'Shoes', false,22);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (26, 1, 'Hats', false,22);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (27, 1, 'Gloves', false,22);
+            INSERT INTO "item_category" ("id", "level", "name", "is_deleted","parent_item_category_id") VALUES (28, 1, 'Others', false,22);
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

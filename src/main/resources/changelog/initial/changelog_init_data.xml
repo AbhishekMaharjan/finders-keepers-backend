@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <!-- Records of client -->
+    <changeSet author="Abhishek Maharjan" id="insert-client">
+        <sql>
+            <![CDATA[
+            INSERT INTO "public"."client" ("id", "authorization_grant_types", "client_authentication_methods",
+                                           "client_id", "client_id_issued_at", "client_name", "client_secret",
+                                           "client_secret_expires_at", "client_settings", "redirect_uris", "scopes",
+                                           "token_settings")
+            VALUES ('1',
+                    'refresh_token,password',
+                    'client_secret_basic',
+                    'client', NULL,
+                    'abbc70f1-fb59-4b42-b1e4-c52fa0080bea',
+                    '$2a$12$1SdaAz8jVr6MF4AoLtU1Ce086rxBXNj1/NylIvGx9w5DL6bB.b4V6',
+                    NULL,
+                    '{"@class":"java.util.Collections$UnmodifiableMap","settings.client.require-proof-key":false,' ||
+                    '"settings.client.require-authorization-consent":false}',
+                    'http://insomnia,http://127.0.0.1:8080/login/oauth2/code/client',
+                    'read,openid,profile',
+                    '{"@class":"java.util.Collections$UnmodifiableMap","settings.token.reuse-refresh-tokens":true,
+                "settings.token.id-token-signature-algorithm":["org.springframework.security.oauth2.jose.jws.SignatureAlgorithm","RS256"],
+                "settings.token.access-token-time-to-live":["java.time.Duration",86400.000000000],
+                "settings.token.access-token-format":{"@class":"org.springframework.security.oauth2.server.authorization.settings.OAuth2TokenFormat",
+                "value":"self-contained"},"settings.token.refresh-token-time-to-live":["java.time.Duration",604800.000000000]}');
+            ]]>
+        </sql>
+    </changeSet>
+
+    <!-- Records of users -->
+    <changeSet author="Abhishek Maharjan" id="insert-users">
+        <sql>
+            <![CDATA[
+            INSERT INTO "public"."users" ("is_enabled", "id", "email", "password", "phone_number")
+            VALUES ('t', 1, 'admin@admin.com', '$2a$12$AmWseWU/dD4RfljX3g87AOjOKItUFsj1TvCkiUNocer57yuMki5Uy',
+                    '9860583735');
+            ]]>
+        </sql>
+    </changeSet>
+
+    <!-- Records of authorities -->
+    <changeSet author="Abhishek Maharjan" id="insert-authorities">
+        <sql>
+            <![CDATA[
+            INSERT INTO "public"."authorities" ("id", "authority", "status")
+            VALUES (1, 'ADMIN', true);
+            INSERT INTO "public"."authorities" ("id", "authority", "status")
+            VALUES (2, 'USERS', true);
+            ]]>
+        </sql>
+    </changeSet>
+
+    <!-- Records of users_authorities -->
+    <changeSet author="Abhishek Maharjan" id="insert-users-authorities">
+        <sql>
+            <![CDATA[
+            INSERT INTO "public"."users_authorities" ("authorities_id", "users_id")
+            VALUES (1, 1);
+            ]]>
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>

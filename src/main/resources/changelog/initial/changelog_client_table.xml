@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="auth-client-sequence" author="Abhishek Maharjan">
+        <createSequence incrementBy="1" sequenceName="client_seq" startValue="1"/>
+    </changeSet>
+
+    <changeSet id="create-table-auth-client" author="Abhishek Maharjan">
+        <createTable tableName="client">
+            <column name="id" type="VARCHAR(25)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_client"/>
+            </column>
+            <column name="client_id" type="VARCHAR(25)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_id_issued_at" type="DATETIME"/>
+            <column name="client_secret" type="VARCHAR(90)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="client_secret_expires_at" type="DATETIME"/>
+            <column name="client_name" type="VARCHAR(100)"/>
+            <column name="client_authentication_methods" type="VARCHAR(50)"/>
+            <column name="authorization_grant_types" type="VARCHAR(50)"/>
+            <column name="redirect_uris" type="VARCHAR(100)"/>
+            <column name="scopes" type="VARCHAR(35)"/>
+            <column name="client_settings" type="VARCHAR(150)"/>
+            <column name="token_settings" type="VARCHAR(650)"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

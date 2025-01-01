@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev
+  liquibase:
+    change-log: classpath:changelog/changelog-master.xml
+  jackson:
+    serialization:
+      FAIL_ON_EMPTY_BEANS: false
+  data:
+    web:
+      pageable:
+        max-page-size: 200
+server:
+  port: 8080

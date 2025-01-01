@@ -1,0 +1,21 @@
+services:
+  finders-keepers-postgres:
+    image: postgres:15.5
+    restart: always
+    command: postgres -c 'max_connections=100'
+    env_file:
+      - .env
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  finders-keepers-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

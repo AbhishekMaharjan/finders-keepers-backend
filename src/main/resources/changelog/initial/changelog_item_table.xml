@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+    <changeSet id="create-item-sequence" author="abhishek maharjan">
+        <createSequence sequenceName="item_seq" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="create-item-table" author="abhishek maharjan">
+        <createTable tableName="item">
+            <column name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pk_item" nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(1000)"/>
+            <column name="nearest_landmark" type="VARCHAR(1000)"/>
+            <column name="date_reported" type="TIMESTAMP"/>
+            <column name="status" type="VARCHAR(20)"/>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false"/>
+            <column name="address_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descriptive_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="users_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="add-foreign-keys-to-item-table" author="abhishek maharjan">
+        <addForeignKeyConstraint baseTableName="item"
+                                 baseColumnNames="address_id"
+                                 referencedTableName="address"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_item_address"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="item"
+                                 baseColumnNames="descriptive_id"
+                                 referencedTableName="descriptive_attributes"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_item_descriptive"
+                                 onDelete="CASCADE"/>
+
+        <addForeignKeyConstraint baseTableName="item"
+                                 baseColumnNames="users_id"
+                                 referencedTableName="users"
+                                 referencedColumnNames="id"
+                                 constraintName="fk_item_users"
+                                 onDelete="SET NULL"/>
+    </changeSet>
+
+    <changeSet id="create-item-categorie-join-table" author="abhishek maharjan">
+        <createTable tableName="item_categories_join">
+            <column name="item_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="item_category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="item_categories_join"
+                                 baseColumnNames="item_id"
+                                 constraintName="FK_item_categories_join_item"
+                                 referencedTableName="item"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="item_categories_join"
+                                 baseColumnNames="item_category_id"
+                                 constraintName="FK_item_categories_join_item_category"
+                                 referencedTableName="item_category"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="add-colum-item-abstract-entity" author="abhishek maharjan">
+        <addColumn tableName="item">
+            <column name="created_date" type="DATETIME"/>
+            <column name="modified_date" type="DATETIME"/>
+            <column name="created_by" type="BIGINT"/>
+            <column name="modified_by" type="BIGINT"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="add-column-item-file" author="abhishek maharjan">
+        <addColumn tableName="item">
+            <column name="file_id" type="bigint"/>
+        </addColumn>
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="item"
+                                 constraintName="fk_item_file"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file"/>
+    </changeSet>
+
+</databaseChangeLog>
